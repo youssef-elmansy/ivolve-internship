@@ -129,7 +129,3 @@ Hello iVolve Trainee
 ```
 
 ---
-
-> ### Screenshot Placeholder (Lab1 Execution Result)
-![Lab 1 Result](lab1.png)
----
