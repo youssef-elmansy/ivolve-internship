@@ -54,7 +54,7 @@ EXPOSE 8080
 CMD ["python", "app.py"]
 ```
 
-![docker-file-1](screenshots/'docker file 1.png')
+![docker-file-1](screenshots/docker-file-1.png)
 
 ---
 
@@ -129,7 +129,7 @@ EXPOSE 8080
 CMD ["python", "app.py"]
 ```
 
-![docker-file-2](screenshots/'docker file 2.png')
+![docker-file-2](screenshots/docker-file-2.png)
 
 ## 4.3.2 Build Docker Image-2
 
