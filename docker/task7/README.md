@@ -100,7 +100,7 @@ vim ~/nginx-bind/html/index.html
 Update content:
 
 ```html
-Hello from Bind Mount (after update)
+Hello from Bind Mount (after edit)
 ```
 
 Test again:
