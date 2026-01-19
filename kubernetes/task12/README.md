@@ -46,6 +46,8 @@ kubectl get configmap -n ivolve
 kubectl get secret -n ivolve
 ```
 [verify](/screenshots/verify.png)
+
+
 ---
 
 ## ✅ Result

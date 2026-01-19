@@ -48,7 +48,7 @@ kubectl taint node minikube-m02 node=worker:NoSchedule
 ```bash
 kubectl describe node minikube-m02
 ```
-![verify taint](taint.png)
+![verify taint](screenshots/taints.png)
 
 ---
 
