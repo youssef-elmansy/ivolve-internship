@@ -44,8 +44,7 @@ kubectl create secret docker-registry dockerhub-secret \
   --docker-server=https://index.docker.io/v1/ \
   --docker-username=DOCKERHUB_USERNAME \
   --docker-password=DOCKERHUB_PASSWORD \
-  --docker-email=YOUR_EMAIL \
-  -n ivolve
+  --docker-email=YOUR_EMAIL 
 ```
 
 ## PersistentVolumeClaim
@@ -93,7 +92,7 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: nodejs
-        image: your_dockerhub_username/nodejs-app:latest
+        image: youssefaelmansy/nodejs-iamge:1.0
         ports:
         - containerPort: 3000
         envFrom:
