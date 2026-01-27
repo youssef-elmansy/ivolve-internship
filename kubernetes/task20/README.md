@@ -118,7 +118,7 @@ Expected output:
 ```
 yes
 ```
-![validation](/screenshots/20.png)
+![validation]/screenshots/20.png)
 ---
 
 ## ✅ Conclusion

@@ -103,7 +103,7 @@ wget -qO- http://10.244.0.5:9100/metrics
 ✔️ This confirms that the Node Exporter is accessible internally within the cluster.
 
 
-![verify metrics](/screenshots/19-2.png)
+![verify metrics](screenshots/19-2.png)
 
 
 ---
