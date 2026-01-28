@@ -65,6 +65,7 @@ Follow the Jenkins GUI wizard to install plugins and create an admin account.
    - `user2`: Read-only Permissions
 4. Save configuration.
 
+<img width="1902" height="712" alt="1" src="https://github.com/user-attachments/assets/32a40235-f8a0-4bff-8343-2cc482c82cc8" />
 
 
 ### Step 3: Verify
