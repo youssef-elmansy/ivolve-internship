@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "youssefaelmansy/java_app"
+    }
+    stages {
+        
+        stage('Unit Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Build App') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t $IMAGE_NAME:$BUILD_NUMBER ."
+            }
+        }
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh "docker push $IMAGE_NAME:$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Delete Local Image') {
+            steps {
+                sh "docker rmi $IMAGE_NAME:$BUILD_NUMBER"
+            }
+        }
+        stage('Update deployment.yaml') {
+            steps {
+                sh "sed -i 's|image:.*|image: $IMAGE_NAME:$BUILD_NUMBER|' k8s/deployment.yaml"
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh "kubectl apply -f k8s/deployment.yaml"
+            }
+        }
+    }
+    post {
+        always {
+            echo "Pipeline finished!"
+        }
+        success {
+            echo "Deployment successful!"
+        }
+        failure {
+            echo "Pipeline failed. Check the logs!"
+        }
+    }
+}
+
