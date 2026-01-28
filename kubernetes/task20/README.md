@@ -118,7 +118,9 @@ Expected output:
 ```
 yes
 ```
-![validation]/screenshots/20.png)
+<img width="1477" height="150" alt="20" src="https://github.com/user-attachments/assets/22618cd4-9c15-4c41-9dd7-8f088dfe0d3a" />
+
+
 ---
 
 ## ✅ Conclusion

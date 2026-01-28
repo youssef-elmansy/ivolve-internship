@@ -81,7 +81,7 @@ kubectl get pods -n monitoring -o wide
 
 ✔️ You should see **one Pod per Node** in the cluster.
 
-![verify pods](/screenshots/19-1.png)
+<img width="1286" height="85" alt="19-1" src="https://github.com/user-attachments/assets/4f75de67-eac7-40b1-ae41-9d52eaacda5a" />
 
 
 ---
@@ -103,7 +103,7 @@ wget -qO- http://10.244.0.5:9100/metrics
 ✔️ This confirms that the Node Exporter is accessible internally within the cluster.
 
 
-![verify metrics](screenshots/19-2.png)
+<img width="1523" height="415" alt="19-2" src="https://github.com/user-attachments/assets/2c8a11d1-f90c-4494-b51f-9c8e193e971a" />
 
 
 ---
