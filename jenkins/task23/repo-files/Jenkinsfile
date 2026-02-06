@@ -1,0 +1,67 @@
+@Library('shared-lib') _
+
+pipeline {
+    agent { label 'agent-1' }
+
+    environment {
+        IMAGE_NAME = "youssefaelmansy/java_app"
+    }
+
+    stages {
+
+        stage('RunUnitTest') {
+            steps {
+                runUnitTest()
+            }
+        }
+
+        stage('BuildApp') {
+            steps {
+                buildApp()
+            }
+        }
+
+        stage('BuildImage') {
+            steps {
+                buildImage(IMAGE_NAME, BUILD_NUMBER)
+            }
+        }
+
+        stage('ScanImage') {
+            steps {
+                scanImage(IMAGE_NAME, BUILD_NUMBER)
+            }
+        }
+
+        stage('PushImage') {
+            steps {
+                pushImage(IMAGE_NAME, BUILD_NUMBER)
+            }
+        }
+
+        stage('RemoveImageLocally') {
+            steps {
+                deleteImage(IMAGE_NAME, BUILD_NUMBER)
+            }
+        }
+
+        stage('DeployOnK8s') {
+            steps {
+                deployOnK8s()
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline finished!"
+        }
+        success {
+            echo "Deployment successful!"
+        }
+        failure {
+            echo "Pipeline failed. Check the logs!"
+        }
+    }
+}
+
