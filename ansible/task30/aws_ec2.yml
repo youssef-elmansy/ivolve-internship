@@ -1,0 +1,19 @@
+plugin: amazon.aws.aws_ec2
+
+regions:
+  - us-east-1
+
+filters:
+  "tag:service": "db"
+  instance-state-name: running
+
+keyed_groups:
+  - key: tags.service
+    prefix: tag
+
+hostnames:
+  - public-ip-address
+
+compose:
+  ansible_user: ec2-user
+

@@ -1,0 +1,23 @@
+- name: Configure Web Server
+  hosts: web
+  become: yes
+
+  tasks:
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start and Enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Customize Web Page
+      copy:
+        content: "<h1>Hello Youssef from Ansible Lab 27</h1>"
+        dest: /var/www/html/index.html
+

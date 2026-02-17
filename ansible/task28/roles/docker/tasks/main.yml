@@ -1,0 +1,11 @@
+
+---
+# tasks file for docker
+- apt:
+    name: ['docker.io']
+    state: present
+    update_cache: yes
+- systemd:
+    name: docker
+    state: started
+    enabled: yes

@@ -1,0 +1,52 @@
+
+---
+# roles/jenkins/tasks/main.yml
+
+- name: Install Java for Jenkins
+  apt:
+    name: openjdk-17-jre-headless
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Download Jenkins signing key
+  shell: wget -qO- https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key | sudo tee /etc/apt/keyrings/jenkins.asc > /dev/null
+  args:
+    creates: /etc/apt/keyrings/jenkins.asc
+  become: yes
+  changed_when: false
+  failed_when: false
+
+- name: Set permissions on Jenkins key
+  file:
+    path: /etc/apt/keyrings/jenkins.asc
+    mode: '0644'
+    owner: root
+    group: root
+  become: yes
+
+- name: Add Jenkins repository
+  copy:
+    content: |
+      deb [signed-by=/etc/apt/keyrings/jenkins.asc] https://pkg.jenkins.io/debian-stable binary/
+    dest: /etc/apt/sources.list.d/jenkins.list
+    mode: '0644'
+  become: yes
+
+- name: Update apt cache after adding Jenkins repo
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Install Jenkins
+  apt:
+    name: jenkins
+    state: present
+  become: yes
+
+- name: Start and enable Jenkins service
+  systemd:
+    name: jenkins
+    state: started
+    enabled: yes
+  become: yes

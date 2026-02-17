@@ -1,0 +1,8 @@
+---
+- name: Install MySQL on DB servers
+  hosts: tag_service_db
+  become: yes
+
+  roles:
+    - mysql
+

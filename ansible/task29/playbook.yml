@@ -1,0 +1,46 @@
+- name: Secure MySQL Setup
+  hosts: all
+  become: yes
+
+  vars_files:
+    - vault.yml
+
+  tasks:
+
+    - name: Install MySQL
+      apt:
+        name:
+          - mysql-server
+          - python3-pymysql
+        state: present
+        update_cache: yes
+
+    - name: Start MySQL
+      systemd:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Set root password
+      community.mysql.mysql_user:
+        name: root
+        password: "{{ mysql_root_password }}"
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        host_all: yes
+
+    - name: Create iVolve database
+      community.mysql.mysql_db:
+        name: iVolve
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+    - name: Create DB user
+      community.mysql.mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: "iVolve.*:ALL"
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
